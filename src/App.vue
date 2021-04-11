@@ -1,28 +1,8 @@
 <template>
-  <Welcome/>
+  <router-link to="/"></router-link>
+  <router-link to="/rooms/:id"></router-link>
+  <router-view/>
 </template>
-
-<script>
-import Welcome from './components/Welcome.vue'
-
-export default {
-  name: 'App',
-  components: {
-    Welcome
-  }
-}
-
-//FIRST
-// const axios = require('axios')
-
-// function makeTodoDone() {
-//     axios.patch("http://localhost:3000/users/1233211212314145135")
-//   }
-
-// makeTodoDone()
-
-
-</script>
 
 <style>
 #app {
