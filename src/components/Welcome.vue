@@ -16,6 +16,18 @@
         </div>
       </div>
     </div>
+
+    <div class="relative py-3 sm:max-w-xl sm:mx-auto">
+      <div class="absolute inset-0 bg-gradient-to-r from-green-400 to-blue-500 shadow-lg transform scale-95 -skew-x-6 sm:skew-y-0 sm:-rotate-6 rounded-3xl"></div>
+      <div class="relative px-4 py-10 bg-white shadow-lg rounded-3xl sm:p-5 flex flex-col justify-around">
+        <p class="font-bold">Set custom name</p>
+        <form>
+          <input type="text" name="newname" id="newname">
+        </form>
+        <button class="transition duration-300 transform hover:scale-105 relative bg-white hover:shadow-lg rounded-3xl sm:p-2 max-w-md mx-auto text-xl font-bold inline-flex my-2">Submit</button>
+      </div>
+    </div>
+
     <div class="relative py-3 sm:max-w-xl sm:mx-auto">
       <div class="absolute inset-0 bg-gradient-to-r from-green-400 to-blue-500 shadow-lg transform scale-95 -skew-x-6 sm:skew-y-0 sm:-rotate-6 rounded-3xl"></div>
       <button class="transition duration-300 transform hover:scale-110 relative bg-white shadow-lg rounded-3xl sm:p-5 max-w-md mx-auto text-2xl font-bold inline-flex">
