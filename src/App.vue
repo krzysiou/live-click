@@ -11,6 +11,17 @@ export default {
     Welcome
   }
 }
+
+//FIRST
+// const axios = require('axios')
+
+// function makeTodoDone() {
+//     axios.patch("http://localhost:3000/users/1233211212314145135")
+//   }
+
+// makeTodoDone()
+
+
 </script>
 
 <style>
