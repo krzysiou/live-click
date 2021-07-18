@@ -2,6 +2,7 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import Welcome from '../components/Welcome.vue'
 import Rooms from '../components/Rooms.vue'
 import LogIn from '../components/LogIn.vue'
+import Error from '../components/Error.vue'
 
 const routes = [
   {
@@ -18,6 +19,11 @@ const routes = [
     path: '/users/:userId',
     name: 'Welcome',
     component: Welcome
+  },
+  {
+    path: '/error',
+    name: 'Error',
+    component: Error
   }
 ]
 

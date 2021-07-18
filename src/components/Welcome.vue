@@ -21,10 +21,12 @@
       <div class="absolute inset-0 bg-gradient-to-r from-green-400 to-blue-500 shadow-lg transform scale-95 -skew-x-6 sm:skew-y-0 sm:-rotate-6 rounded-3xl"></div>
       <div class="relative px-4 py-10 bg-white shadow-lg rounded-3xl sm:p-5 flex flex-col justify-around">
         <p class="font-bold">Set custom name</p>
-        <form>
-          <input type="text" name="newname" id="newname">
-        </form>
-        <button class="transition duration-300 transform hover:scale-105 relative bg-white hover:shadow-lg rounded-3xl sm:p-2 max-w-md mx-auto text-xl font-bold inline-flex my-2">Submit</button>
+        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="newname" type="text" placeholder="Name">
+        <div class="flex items-center justify-center">
+          <button @click="submit()" class="bg-green-500 hover:bg-green-600 text-white font-bold my-4 w-24 py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+                            Change
+          </button>
+        </div>
       </div>
     </div>
 
@@ -39,11 +41,23 @@
 </template>
 
 <script>
+const axios = require('axios');
+
 export default {
   name: 'Welcome',
   methods: {
     redirect: function(){
       location.replace("http://localhost:8080/#/rooms/123");
+    },
+    submit: function(){
+        const newUsername = document.getElementById("newname").value;
+        document.getElementById("newname").value = ""
+        const id = window.location.href.split("/")[5]
+        axios.patch('http://localhost:3000/users/'+id, {
+            name: newUsername,
+        }).then(resp => {
+            console.log(resp)
+        })
     }
   }
 }
