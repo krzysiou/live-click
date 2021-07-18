@@ -6,6 +6,10 @@
             <form>
                 <div class="mb-4">
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+                        E-mail
+                    </label>
+                    <input class="shadow appearance-none border rounded w-full mb-3 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="text" placeholder="E-mail">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
                         Username
                     </label>
                     <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Username">
@@ -17,10 +21,10 @@
                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-1 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="Password">
                 </div>
                 <p v-if="error" class="text-red-500 mb-4">{{error}}</p>
-                <p class="mb-4 text-sm">Dont have an account? Register <a href="http://localhost:8080/#/register" class="text-blue-500">here</a></p> 
+                <p class="mb-4 text-sm">Already registered? Sign in <a href="http://localhost:8080/#/login" class="text-blue-500">here</a></p> 
                 <div class="flex items-center justify-around">
                     <button @click="submit()" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
-                        Sign In
+                        Register
                     </button>
                 </div>
             </form>
@@ -30,18 +34,19 @@
 </template>
 
 <script>
+const axios = require('axios')
 const { uuid } = require('uuidv4');
-const axios = require('axios');
 
 export default {
-  name: 'LogIn',
+  name: 'Register',
   data() {
-    return {
-        error: null
-    }
+      return {
+          error: null
+      }
   },
   methods: {
-    submit: async function(){
+      submit: async function(){
+        const email = document.getElementById("email").value;
         const usrnm = document.getElementById("username").value;
         const passwd = document.getElementById("password").value;
         const id = uuid()
@@ -49,6 +54,7 @@ export default {
         try {
             await axios.post('http://localhost:3000/users', {
                 userId: id,
+                userEmail: email,
                 username: usrnm,
                 password: passwd
             })

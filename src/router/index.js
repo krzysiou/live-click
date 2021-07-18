@@ -3,19 +3,35 @@ import Welcome from '../components/Welcome.vue'
 import Rooms from '../components/Rooms.vue'
 import LogIn from '../components/LogIn.vue'
 import Error from '../components/Error.vue'
+import Register from '../components/Register.vue'
 import axios from 'axios'
 
 const routes = [
   {
     path: '/',
+    beforeEnter: ( async (to, from, next) => {
+      next('/login')
+    })
+  },
+  
+  {
+    path: '/register',
+    name: 'Register',
+    component: Register
+  },
+
+  {
+    path: '/login',
     name: 'LogIn',
     component: LogIn
   },
+
   {
     path: '/rooms/:roomId',
     name: 'Rooms',
     component: Rooms
   },
+
   {
     path: '/users/:userId',
     name: 'Welcome',
@@ -29,15 +45,15 @@ const routes = [
         next('/error')
         return
       }
-
       next()
     })
   },
+
   {
     path: '/error',
     name: 'Error',
     component: Error
-  }
+  },
 ]
 
 const router = createRouter({
