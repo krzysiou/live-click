@@ -16,6 +16,7 @@
                     </label>
                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="Password">
                 </div>
+                <p v-if="error" class="text-red-500 mb-4">{{error}}</p> 
                 <div class="flex items-center justify-center">
                     <button @click="submit()" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
                         Sign In
@@ -30,30 +31,34 @@
 <script>
 const { uuid } = require('uuidv4');
 const axios = require('axios');
-//const { getCookie, setCookie } = require('../utils/cookies.js');
-
-// if(getCookie("userId")){
-//     let readId = getCookie("userId")
-//     window.location.replace("http://localhost:8080/#/users/"+readId)
-// }
 
 export default {
   name: 'LogIn',
+  data() {
+      return {
+          error: null
+      }
+  },
   methods: {
-    submit: function(){
+    submit: async function(){
         const usrnm = document.getElementById("username").value;
         const passwd = document.getElementById("password").value;
         const id = uuid()
-        axios.post('http://localhost:3000/users', {
-            userId: id,
-            username: usrnm,
-            password: passwd
-        }).then(resp => {
-            console.log(resp)
-        })
-        //setCookie("userId", id, 5)
-        window.location.replace("http://localhost:8080/#/users/"+id)
+
+        try {
+            await axios.post('http://localhost:3000/users', {
+                userId: id,
+                username: usrnm,
+                password: passwd
+            })
+
+            window.location.replace("http://localhost:8080/#/users/"+id)
+        } catch (error) {
+            this.error = error.response.data.error
+        }
     }
   }
 }
 </script>
+
+
