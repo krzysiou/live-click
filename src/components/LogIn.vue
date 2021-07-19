@@ -30,31 +30,29 @@
 </template>
 
 <script>
-const { uuid } = require('uuidv4');
 const axios = require('axios');
 
 export default {
   name: 'LogIn',
   data() {
     return {
-        error: null
+        error: null,
     }
   },
   methods: {
     submit: async function(){
-        const usrnm = document.getElementById("username").value;
-        const passwd = document.getElementById("password").value;
-        const id = uuid()
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
 
         try {
-            await axios.post('http://localhost:3000/users', {
-                userId: id,
-                username: usrnm,
-                password: passwd
+            const response = await axios.post('http://localhost:3000/users/login', {
+                username: username,
+                password: password
             })
-
-            window.location.replace("http://localhost:8080/#/users/"+id)
-        } catch (error) {
+            if(response.data.id){
+                location.replace("http://localhost:8080/#/users/"+response.data.id)
+            }
+        } catch(error) {
             this.error = error.response.data.error
         }
     }

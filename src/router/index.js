@@ -39,8 +39,7 @@ const routes = [
     beforeEnter: ( async (to, from, next) => {
       const id = to.path.split("/")[2]
       const response = await axios.get("http://localhost:3000/users")
-      const isPresent = response.data[id] != undefined
-      console.log(isPresent, id, response.data)
+      const isPresent = response.data.some(user => user.id === id)
       if(isPresent == false){
         next('/error')
         return

@@ -58,6 +58,9 @@ export default {
     },
     submit: async function(){
         const newUsername = document.getElementById("newname").value;
+        if(newUsername === ""){
+          return
+        }
         const id = window.location.href.split("/")[5]
         document.getElementById("newname").value = ""
 

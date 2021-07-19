@@ -52,7 +52,7 @@ export default {
         const id = uuid()
 
         try {
-            await axios.post('http://localhost:3000/users', {
+            await axios.post('http://localhost:3000/users/register', {
                 userId: id,
                 userEmail: email,
                 username: usrnm,
