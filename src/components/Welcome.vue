@@ -49,7 +49,7 @@ export default {
 
         try {
             await axios.patch('http://localhost:3000/users/'+id, {
-                name: newUsername,
+                username: newUsername,
             })
         } catch (error) {
             this.error = error.response.data.error

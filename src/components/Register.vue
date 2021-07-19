@@ -54,7 +54,7 @@ export default {
         try {
             await axios.post('http://localhost:3000/users/register', {
                 userId: id,
-                userEmail: email,
+                email: email,
                 username: usrnm,
                 password: passwd
             })
