@@ -65,6 +65,7 @@ export default {
                 username: username,
                 password: password
             })
+            //U GOT TOKEN IN RESPONSE.DATA.ACCESSTOKEN
             if(response.data.id){
                 location.replace("http://localhost:8080/#/users/"+response.data.id)
             }
