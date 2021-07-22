@@ -59,7 +59,7 @@ export default {
                 password: passwd
             })
 
-            window.location.replace("http://localhost:8080/#/users/"+id)
+            window.location.replace("http://localhost:8080/#/login")
         } catch (error) {
             this.error = error.response.data.error
         }
