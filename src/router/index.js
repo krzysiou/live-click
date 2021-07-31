@@ -5,6 +5,7 @@ import LogIn from '../components/LogIn.vue'
 import Error from '../components/Error.vue'
 import Register from '../components/Register.vue'
 import axios from 'axios'
+const { getCookie } = require('../utils/cookies')
 
 const routes = [
   {
@@ -29,7 +30,32 @@ const routes = [
   {
     path: '/rooms/:roomId',
     name: 'Rooms',
-    component: Rooms
+    component: Rooms,
+    beforeEnter: ( async (to, from, next) => {
+      const roomId = to.path.split("/")[2]
+      const response = await axios.get("http://localhost:3000/rooms")
+      const isPresent = response.data.some(room => room.id === roomId)
+      if(isPresent == false){
+        next('/error')
+        return
+      } else {
+        const token = getCookie('accessToken')
+        if(!token){
+          next('/error')
+        } else{
+          try {
+            await axios.get('http://localhost:3000/rooms/'+roomId, {
+              headers: {
+                'Authorization': `Basic ${token}` 
+              }
+            })
+        } catch (error) {
+            console.log(error)
+        }
+          next()
+        }
+      }
+    })
   },
 
   {

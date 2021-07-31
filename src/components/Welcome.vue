@@ -16,7 +16,7 @@
 
     <div class="relative py-3 sm:max-w-xl sm:mx-auto">
       <div class="absolute inset-0 bg-gradient-to-r from-green-400 to-blue-500 shadow-lg transform scale-95 -skew-x-6 sm:skew-y-0 sm:-rotate-6 rounded-3xl"></div>
-      <button @click="redirect()" id="theButton" class="w-full flex justify-between transition duration-300 transform hover:scale-110 relative bg-white shadow-lg rounded-3xl sm:p-5 max-w-md mx-auto text-2xl font-bold">
+      <button @click="createRoom()" id="theButton" class="w-full flex justify-between transition duration-300 transform hover:scale-110 relative bg-white shadow-lg rounded-3xl sm:p-5 max-w-md mx-auto text-2xl font-bold">
         <img src="../assets/plus.svg" alt="add">
         <p class="ml-1">Create room</p>
       </button>
@@ -31,7 +31,8 @@
 </template>
 
 <script>
-import { getCookie } from '../utils/cookies';
+import { getCookie, deleteCookie } from '../utils/cookies';
+const { uuid } = require('uuidv4');
 const axios = require('axios');
 
 export default {
@@ -42,9 +43,18 @@ export default {
     }
   },
   methods: {
-    redirect: function(){
+    createRoom: async function(){
       const id = window.location.href.split("/")[5]
-      location.replace("http://localhost:8080/#/rooms/"+id);
+      const roomId = uuid()
+      try {
+            await axios.post('http://localhost:3000/rooms', {
+              ownerId: id,
+              roomId: roomId
+            })
+            location.replace("http://localhost:8080/#/rooms/"+roomId);
+        } catch (error) {
+            this.error = error.response.data.error
+        }
     },
     submit: async function(){
         const newUsername = document.getElementById("newname").value;
@@ -67,6 +77,7 @@ export default {
         }
     },
     previous: function() {
+      deleteCookie('accessToken')
       location.replace('http://localhost:8080/#/login')
     }
   }

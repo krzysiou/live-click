@@ -47,7 +47,7 @@
 
 <script>
 const axios = require('axios');
-const { getCookie, setCookie } = require('../utils/cookies')
+const { setCookie } = require('../utils/cookies')
 
 export default {
   name: 'LogIn',
@@ -62,25 +62,13 @@ export default {
         const password = document.getElementById("password").value;
 
         try {
-            if(!getCookie('accessToken')){
-                const response = await axios.post('http://localhost:3000/users/login', {
-                    username: username,
-                    password: password,
-                    generateToken: true
-                })
-                setCookie('accessToken', response.data.accessToken, 1)
-                if(response.data.id){
-                location.replace("http://localhost:8080/#/users/"+response.data.id)
-            }
-            } else {
-                const response = await axios.post('http://localhost:3000/users/login', {
-                    username: username,
-                    password: password,
-                    generateToken: false
-                })
-                if(response.data.id){
-                location.replace("http://localhost:8080/#/users/"+response.data.id)
-                }
+            const response = await axios.post('http://localhost:3000/users/login', {
+                username: username,
+                password: password,
+            })
+            setCookie('accessToken', response.data.accessToken, 1)
+            if(response.data.id){
+            location.replace("http://localhost:8080/#/users/"+response.data.id)
             }
         } catch(error) {
             this.error = error.response.data.error
