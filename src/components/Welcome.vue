@@ -1,6 +1,6 @@
 <template>
   <div class="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
-    <div class="relative py-3 mb-40 sm:max-w-xl sm:mx-auto">
+    <div class="relative py-3 mb-20 sm:max-w-xl sm:mx-auto">
       <div class="absolute inset-0 bg-gradient-to-r from-green-400 to-blue-500 shadow-lg transform scale-95 -skew-x-6 sm:skew-y-0 sm:-rotate-6 rounded-3xl"></div>
       <div class="relative px-4 py-10 bg-white shadow-lg rounded-3xl sm:p-5 flex flex-col justify-around">
         <p class="font-bold">Set custom name</p>
@@ -13,6 +13,27 @@
         </div>
       </div>
     </div>
+  <div class="flex justify-center mb-20">
+    <div class="relative py-8 w-80">
+        <div class="absolute inset-0 bg-gradient-to-r from-green-400 to-blue-500 shadow-lg transform scale-95 -skew-x-6 sm:skew-y-0 sm:-rotate-6 rounded-3xl"></div>
+        <div class="relative px-4 py-10 bg-white shadow-lg rounded-3xl sm:p-5 flex flex-col justify-around">
+            <form>
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+                        Join Lobby
+                    </label>
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="roomid" type="text" placeholder="Lobby Id">
+                </div>
+                <p v-if="error" class="text-red-500 mb-4">{{error}}</p>
+                <div class="flex items-center justify-around">
+                    <button @click="joinLobby()" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+                        Join
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+  </div>
 
     <div class="relative py-3 sm:max-w-xl sm:mx-auto">
       <div class="absolute inset-0 bg-gradient-to-r from-green-400 to-blue-500 shadow-lg transform scale-95 -skew-x-6 sm:skew-y-0 sm:-rotate-6 rounded-3xl"></div>
@@ -79,6 +100,11 @@ export default {
     previous: function() {
       deleteCookie('accessToken')
       location.replace('http://localhost:8080/#/login')
+    },
+    joinLobby: async function(){
+      const roomId = document.getElementById("roomid").value;
+      location.replace('http://localhost:8080/#/rooms/'+roomId)
+    
     }
   }
 }
