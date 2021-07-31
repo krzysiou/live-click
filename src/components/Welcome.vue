@@ -103,8 +103,8 @@ export default {
     },
     joinLobby: async function(){
       const roomId = document.getElementById("roomid").value;
+      if (roomId === "") { return }
       location.replace('http://localhost:8080/#/rooms/'+roomId)
-    
     }
   }
 }

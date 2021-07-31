@@ -1,7 +1,7 @@
 <template>
   <div class="min-h-screen bg-gray-100 py-3 flex flex-col justify-around sm:py-12">
 
-    <div class="relative py-3 sm:max-w-xl sm:mx-auto">
+    <!-- <div class="relative py-3 sm:max-w-xl sm:mx-auto">
       <div class="absolute inset-0 bg-gradient-to-r from-green-400 to-blue-500 shadow-lg transform -skew-x-6 sm:skew-y-0 sm:-rotate-6 rounded-3xl"></div>
       <div class="transition duration-700 transform hover:scale-105 relative px-4 py-3 bg-white shadow-lg rounded-3xl sm:p-10">
         <div class="max-w-md mx-auto">
@@ -17,7 +17,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <div class="relative py-3 sm:max-w-xl sm:mx-auto">
       <div class="absolute inset-0 bg-gradient-to-r from-green-400 to-blue-500 shadow-lg transform -skew-x-6 sm:skew-y-0 sm:-rotate-6 rounded-3xl"></div>
@@ -36,11 +36,16 @@
 </template>
 
 <script>
+const jwt = require('jsonwebtoken')
+const { getCookie } = require('../utils/cookies')
+
 export default {
   name: 'Rooms',
   methods: {
     submit: function() {
-      location.replace('http://localhost:8080/#/login')
+      const token = getCookie('accessToken')
+      const userId = jwt.decode(token).id
+      location.replace('http://localhost:8080/#/users/'+userId)
     }
   }
 }
