@@ -36,16 +36,31 @@
 </template>
 
 <script>
-const jwt = require('jsonwebtoken')
+const axios = require('axios')
 const { getCookie } = require('../utils/cookies')
 
 export default {
   name: 'Rooms',
   methods: {
-    submit: function() {
-      const token = getCookie('accessToken')
-      const userId = jwt.decode(token).id
-      location.replace('http://localhost:8080/#/users/'+userId)
+    submit: async function() {
+      const roomId = window.location.href.split('/')[5]
+
+      try {
+            const response = await axios.post('http://localhost:3000/rooms/'+roomId+'/leave', {}, {
+              headers: {
+                'Authorization': `Basic ${getCookie('accessToken')}` 
+              }
+            })
+            await axios.delete('http://localhost:3000/rooms/'+roomId, {
+              headers: {
+                'Authorization': `Basic ${getCookie('accessToken')}` 
+              }
+            })
+          location.replace('http://localhost:8080/#/users/' + response.data.userId)
+        } catch (error) {
+            this.error = error.response.data.error
+        }
+
     }
   }
 }
