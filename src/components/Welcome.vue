@@ -66,13 +66,15 @@ export default {
     createRoom: async function(){
       const id = window.location.href.split("/")[5]
       try {
-            await axios.post('http://localhost:3000/rooms', {
-              ownerId: id,
-            })
-            location.replace("http://localhost:8080/#/rooms/"+id);
-        } catch (error) {
-            this.error = error.response.data.error
-        }
+        await axios.post('http://localhost:3000/rooms', {
+          ownerId: id,
+        })
+      } catch (error) {
+        this.error = error.response.data.error
+      } finally { 
+        location.replace("http://localhost:8080/#/rooms/"+id);
+      }
+        
     },
     submit: async function(){
         const newUsername = document.getElementById("newname").value;
