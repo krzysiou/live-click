@@ -67,8 +67,12 @@ export default {
       const id = window.location.href.split("/")[5]
       try {
         await axios.post('http://localhost:3000/rooms', {
-          ownerId: id,
-        })
+              ownerId: id
+            }, {
+              headers: {
+                'Authorization': `Basic ${getCookie('accessToken')}` 
+              }
+            })
       } catch (error) {
         this.error = error.response.data.error
       } finally { 

@@ -3,8 +3,7 @@
 
     <div class="relative py-3 sm:max-w-xl sm:mx-auto">
       <div class="absolute inset-0 bg-gradient-to-r from-green-400 to-blue-500 shadow-lg transform -skew-x-6 sm:skew-y-0 sm:-rotate-6 rounded-3xl"></div>
-      <button @click="pushButton()" class="transition duration-700 transform hover:scale-105 relative bg-white shadow-lg rounded-3xl sm:p-48 max-w-md mx-auto text-2xl font-bold inline-flex">
-      </button>
+      <button id="button" @click="pushButton()" class="transition duration-700 transform hover:scale-105 relative bg-white shadow-lg rounded-3xl sm:p-48 max-w-md mx-auto text-2xl font-bold inline-flex"></button>
     </div>
     <div class="flex flex-row justify-around w-96">
       <div class="relative py-3">
