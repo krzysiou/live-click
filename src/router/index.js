@@ -5,12 +5,21 @@ import LogIn from '../components/LogIn.vue'
 import Error from '../components/Error.vue'
 import Register from '../components/Register.vue'
 import axios from 'axios'
+import jwt from 'jsonwebtoken'
 const { getCookie } = require('../utils/cookies')
+
 
 const routes = [
   {
     path: '/',
     beforeEnter: ( async (to, from, next) => {
+      const token = getCookie("accessToken")
+      if(token){
+        const decoded = jwt.decode(token)
+        const userId = decoded.id
+        next('/users/'+userId)
+        return
+      }
       next('/login')
     })
   },
@@ -23,6 +32,16 @@ const routes = [
 
   {
     path: '/login',
+    beforeEnter: ( async (to, from, next) => {
+      const token = getCookie("accessToken")
+      if(token){
+        const decoded = jwt.decode(token)
+        const userId = decoded.id
+        next('/users/'+userId)
+        return
+      }
+      next()
+    }),
     name: 'LogIn',
     component: LogIn
   },
