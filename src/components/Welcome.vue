@@ -53,7 +53,6 @@
 
 <script>
 import { getCookie, deleteCookie } from '../utils/cookies';
-const { uuid } = require('uuidv4');
 const axios = require('axios');
 
 export default {
@@ -66,13 +65,11 @@ export default {
   methods: {
     createRoom: async function(){
       const id = window.location.href.split("/")[5]
-      const roomId = uuid()
       try {
             await axios.post('http://localhost:3000/rooms', {
               ownerId: id,
-              roomId: roomId
             })
-            location.replace("http://localhost:8080/#/rooms/"+roomId);
+            location.replace("http://localhost:8080/#/rooms/"+id);
         } catch (error) {
             this.error = error.response.data.error
         }
