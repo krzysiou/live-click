@@ -3,7 +3,7 @@
 
     <div class="relative py-3 sm:max-w-xl sm:mx-auto">
       <div class="absolute inset-0 bg-gradient-to-r from-green-400 to-blue-500 shadow-lg transform -skew-x-6 sm:skew-y-0 sm:-rotate-6 rounded-3xl"></div>
-      <button class="transition duration-700 transform hover:scale-105 relative bg-white shadow-lg rounded-3xl sm:p-48 max-w-md mx-auto text-2xl font-bold inline-flex">
+      <button @click="pushButton()" class="transition duration-700 transform hover:scale-105 relative bg-white shadow-lg rounded-3xl sm:p-48 max-w-md mx-auto text-2xl font-bold inline-flex">
       </button>
     </div>
 
@@ -33,7 +33,7 @@ export default {
                 'Authorization': `Basic ${getCookie('accessToken')}` 
               }
             })
-            await axios.delete('http://localhost:3000/rooms/'+roomId, {
+            await axios.delete('http://localhost:3000/rooms/'+roomId, {}, {
               headers: {
                 'Authorization': `Basic ${getCookie('accessToken')}` 
               }
@@ -43,6 +43,19 @@ export default {
             this.error = error.response.data.error
         }
 
+    },
+    pushButton: async function() {
+        const roomId = window.location.href.split('/')[5]
+
+        try {
+          await axios.patch('http://localhost:3000/rooms/'+roomId, {}, {
+            headers: {
+              'Authorization': `Basic ${getCookie('accessToken')}` 
+            }
+          })
+        } catch (error) {
+              this.error = error.response.data.error
+        }
     }
   }
 }
