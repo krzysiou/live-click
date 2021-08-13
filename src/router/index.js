@@ -13,10 +13,12 @@ const routes = [
   {
     path: '/',
     beforeEnter: ( async (to, from, next) => {
+      //CHECK IF TOKEN EXISTS
       const token = getCookie("accessToken")
       if(token){
         const decoded = jwt.decode(token)
         const userId = decoded.id
+        //REDIRECT TO USER ACCOUNT
         next('/users/'+userId)
         return
       }
@@ -33,10 +35,12 @@ const routes = [
   {
     path: '/login',
     beforeEnter: ( async (to, from, next) => {
+      //CHERCK IF TOKEN EXISTS
       const token = getCookie("accessToken")
       if(token){
         const decoded = jwt.decode(token)
         const userId = decoded.id
+        //REDIRECT TO USER ACCOUNT
         next('/users/'+userId)
         return
       }
@@ -51,18 +55,22 @@ const routes = [
     name: 'Rooms',
     component: Rooms,
     beforeEnter: ( async (to, from, next) => {
+      //GET ROOMID FROM URL
       const roomId = to.path.split("/")[2]
       const response = await axios.get("http://localhost:3000/rooms")
+      //CHECK IF ROOM ALREADY EXISTS
       const isPresent = response.data.some(room => room.id === roomId)
       if(isPresent == false){
         next('/error')
         return
       } else {
+        //CHECK IF TOKEN EXISTS
         const token = getCookie('accessToken')
         if(!token){
           next('/error')
         } else{
           try {
+            //ADD USER TO ROOM
             await axios.get('http://localhost:3000/rooms/'+roomId, {
               headers: {
                 'Authorization': `Basic ${token}` 
@@ -82,8 +90,10 @@ const routes = [
     name: 'Welcome',
     component: Welcome,
     beforeEnter: ( async (to, from, next) => {
+      //GET USERID FROM URL
       const id = to.path.split("/")[2]
       const response = await axios.get("http://localhost:3000/users")
+      //CHECK IF USER EXISTS
       const isPresent = response.data.some(user => user.id === id)
       if(isPresent == false){
         next('/error')
