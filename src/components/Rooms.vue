@@ -1,6 +1,8 @@
 <template>
   <div class="min-h-screen bg-gray-100 py-3 flex flex-col justify-around items-center sm:py-12">
 
+    <div v-if="checkStatus" id="countdown"></div>
+
     <div class="relative py-3 sm:max-w-xl sm:mx-auto">
       <div class="absolute inset-0 bg-gradient-to-r from-green-400 to-blue-500 shadow-lg transform -skew-x-6 sm:skew-y-0 sm:-rotate-6 rounded-3xl"></div>
       <button id="button" @click="pushButton()" class="transition duration-700 transform hover:scale-105 relative bg-white shadow-lg rounded-3xl sm:p-48 max-w-md mx-auto text-2xl font-bold inline-flex"></button>
@@ -44,7 +46,10 @@ export default {
       const decoded = jwt.decode(token)
       const userId = decoded.id
       return userId === roomId
-    }
+    },
+    checkStatus: function() {
+      return true
+    },
   },
   methods: {
     leave: async function() {
@@ -60,6 +65,9 @@ export default {
             await axios.delete('http://localhost:3000/rooms/'+roomId, {
               headers: {
                 'Authorization': `Basic ${getCookie('accessToken')}` 
+              },
+              data: {
+                fileId: fileId
               }
             })
         } catch (error) {
