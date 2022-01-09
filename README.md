@@ -15,21 +15,21 @@ It briefly explains the main purpose of the site and lets you ```log in``` or re
 
 ### Register [component](./src/components/Register.vue)
 
-![Zrzut ekranu 2022-01-9 o 01 33 28](https://user-images.githubusercontent.com/60892747/148664792-5ccb885b-27b9-4f3d-9927-f3f84f17fa16.png)
+![Zrzut ekranu 2022-01-9 o 02 15 40](https://user-images.githubusercontent.com/60892747/148665495-fb46d01a-4941-46ca-9860-3fea4214e9a9.png)
 
 Basic registration. Three input forms that gather data which will be sent to the server. It also contains button which allows you to redirect to ```log in``` if you already got an account.
 
 ### Welcome [component](./src/components/Welcome.vue)
 
-![Zrzut ekranu 2022-01-9 o 01 34 00](https://user-images.githubusercontent.com/60892747/148664842-92d92d85-3a1d-4f9f-8ef7-795e66c16ee8.png)
+![Zrzut ekranu 2022-01-9 o 02 16 27](https://user-images.githubusercontent.com/60892747/148665498-830eb1e4-58fd-44ea-9658-7ac331b8e7b0.png)
 
 Now things start to get interesting. The welcome component consists of three main components and a log out button with ```X``` icon on it. ```set custom name``` allows you to set your nickname that other players will see upon entering room. ```create room``` creates a room with id same as your ```user id```. ```join lobby``` allows you to join existing room by typing in lobby id which is the same as its owner's id, simply copy the id from url and pass it to your friends.
 
 ### Rooms [component](./src/components/Rooms.vue)
 
-![Zrzut ekranu 2022-01-9 o 01 34 12](https://user-images.githubusercontent.com/60892747/148664897-5862f9b9-0e7b-49ad-b983-fff50bc1d4c7.png)
+![Zrzut ekranu 2022-01-9 o 02 16 55](https://user-images.githubusercontent.com/60892747/148665503-1ccae5d6-c6dd-4cff-a2c0-8fbb6c9ff6bb.png)
 
-![Zrzut ekranu 2022-01-9 o 01 35 00](https://user-images.githubusercontent.com/60892747/148664899-8b954d7b-54fe-44ac-8e42-0896220023f5.png)
+![Zrzut ekranu 2022-01-9 o 02 17 54](https://user-images.githubusercontent.com/60892747/148665505-b3c8e6b8-4ff1-4294-92e8-1b0edab2483c.png)
 
 It comes in two variants which depend if you are the ```room owner```. ```Standard version``` have two buttons, bottom one leaves the room. and the middle one allowys you to play the game. This button will be the one that registers order of users clicks. ```Owner version``` comes with two additional buttons. One represented by the ```play icon``` starts the timer set to 5 seconds after which the server will start registering clicks and forming bracket. The second one represented by ```restart icon``` resets the bracket.
 
