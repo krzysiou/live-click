@@ -31,7 +31,7 @@ Now things start to get interesting. The welcome component consists of three mai
 
 ![Zrzut ekranu 2022-01-9 o 02 17 54](https://user-images.githubusercontent.com/60892747/148665505-b3c8e6b8-4ff1-4294-92e8-1b0edab2483c.png)
 
-It comes in two variants which depend if you are the ```room owner```. ```Standard version``` have two buttons, bottom one leaves the room. and the middle one allowys you to play the game. This button will be the one that registers order of users clicks. ```Owner version``` comes with two additional buttons. One represented by the ```play icon``` starts the timer set to 5 seconds after which the server will start registering clicks and forming bracket. The second one represented by ```restart icon``` resets the bracket.
+It comes in two variants. The one shown to you depends on your ```room owner``` status. ```Standard version``` have two buttons, bottom one leaves the room. and the middle one allowys you to play the game. This button will be the one that registers order of users clicks. ```Owner version``` comes with two additional buttons. One represented by the ```play icon``` starts the timer set to 5 seconds after which the server will start registering clicks and forming bracket. The second one represented by ```restart icon``` resets the bracket.
 
 ### Error [component](./src/components/Error.vue)
 
