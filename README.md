@@ -36,3 +36,7 @@ It comes in two variants which depend if you are the ```room owner```. ```Standa
 ### Error [component](./src/components/Error.vue)
 
 This sub-site is displayed every time that error occurs.
+
+## Debugging
+
+If something does not work properly start your debug process by deleting cookies provided by localhost.
