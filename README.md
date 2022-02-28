@@ -7,6 +7,7 @@ A website designed to help you and your friends play different games in which or
 - VueRouter
 - Axios
 - Tailwind CSS
+- Cookies
 - JWT token
 
 ## Website setup
