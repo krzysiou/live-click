@@ -1,6 +1,14 @@
 # live-click
 A website designed to help you and your friends play different games in which order of responses matters. The idea struck me in the beggining of global lockdown due to coronavirus spread. Me and my friends lacked a platform to play said games so i thought of making a website to solve that problem. It is based on ```rooms``` to which users can join and enjoy time spend together. Website registers order of player clicks and builds a bracket.
 
+## Technologies
+
+- Vue
+- VueRouter
+- Axios
+- Tailwind CSS
+- JWT token
+
 ## Website setup
 For starters install all modules using ```npm install```. And start hosting the website by typing ```npm run serve```, after few seconds just simply hit on one of two links displayed in your command prompt and enjoy cruising my website. It is important to notice that for cruicial features of the site you will need a serverside backend that i developed [here](https://github.com/krzysiou/live-click-api) just follow the guide there to setup server for our website.
 
